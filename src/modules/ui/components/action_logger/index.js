@@ -74,21 +74,27 @@ class ActionLogger extends Component {
 
   getActionData() {
     return this.props.actions
-      .map((action) => (
-      <div style={logDivStyle} key={action.id}>
-        <div style={countWrapper}>
-          { action.count > 1 && <span style={ countStyle }>{ action.count }</span> }
+      .map((action) => {
+        let data = action.data;
+        if (action.data.args) {
+          data = action.data.args.length === 1 ? action.data.args[0] : action.data.args;
+        }
+        return (
+          <div style={logDivStyle} key={action.id}>
+          <div style={countWrapper}>
+            { action.count > 1 && <span style={ countStyle }>{ action.count }</span> }
+          </div>
+          <div style={inspectorStyle}>
+            <Inspector
+              showNonenumerable
+              name={action.data.name}
+              data={data}
+            />
+          </div>
+          <span style={actionNameStyle}>{action.data.name}</span>
         </div>
-        <div style={inspectorStyle}>
-          <Inspector
-            showNonenumerable
-            name={action.data.name}
-            data={action.data.args || action.data}
-          />
-        </div>
-        <span style={actionNameStyle}>{action.data.name}</span>
-      </div>
-      ));
+      );
+      });
   }
 
   render() {
