@@ -76,7 +76,7 @@ class ActionLogger extends Component {
     return this.props.actions
       .map((action) => {
         let data = action.data;
-        if(action.data.args){
+        if (action.data.args) {
           data = action.data.args.length === 1 ? action.data.args[0] : action.data.args;
         }
         return (
@@ -93,8 +93,8 @@ class ActionLogger extends Component {
           </div>
           <span style={actionNameStyle}>{action.data.name}</span>
         </div>
-      )
-  });
+      );
+      });
   }
 
   render() {
