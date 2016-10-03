@@ -40,7 +40,7 @@ var listStyle = (0, _extends3.default)({}, _theme.baseFonts);
 
 var listStyleType = {
   listStyleType: 'none',
-  'padding-left': 0
+  paddingLeft: 0
 };
 
 var kindStyle = {
