@@ -8,6 +8,10 @@ import uiModule from './modules/ui';
 import { setContext, setActions } from './compose';
 
 export class Provider {
+  getPanels() {
+    throw new Error('Provider.getPanels() is not implemented!');
+  }
+
   renderPreview(selectedKind, selectedStory) { // eslint-disable-line no-unused-vars
     throw new Error('Provider.renderPreview() is not implemented!');
   }
