@@ -20,7 +20,7 @@ const downPanelStyle = {
   position: 'absolute',
   width: '100%',
   height: '100%',
-  padding: '5px 10px 10px 0',
+  padding: '0px 10px 10px 0',
   boxSizing: 'border-box',
 };
 
@@ -68,57 +68,81 @@ const onDragEnd = function () {
 };
 
 class Layout extends React.Component {
-  render() {
+  renderRightPanel() {
     const {
-      goFullScreen, showLeftPanel, showDownPanel, downPanelInRight,
-      downPanel, leftPanel, preview,
+      goFullScreen,
+      downPanel, showDownPanel, downPanelInRight,
+      preview,
     } = this.props;
 
-    let previewStyle = normalPreviewStyle;
+    const previewStyle = goFullScreen
+      ? fullScreenPreviewStyle
+      : normalPreviewStyle;
 
-    if (goFullScreen) {
-      previewStyle = fullScreenPreviewStyle;
+    const contentPanel = (
+      <div style={contentPanelStyle}>
+        <div style={previewStyle}>
+          {preview()}
+        </div>
+      </div>
+    );
+
+    if (!showDownPanel) {
+      return contentPanel;
     }
 
-    const leftPanelDefaultSize = showLeftPanel ? 250 : 1;
-    let downPanelDefaultSize = 1;
-    if (showDownPanel) {
-      downPanelDefaultSize = downPanelInRight ? 400 : 200;
-    }
+    const downPanelDefaultSize = downPanelInRight ? 400 : 200;
+
+    return (
+      <SplitPane
+        split={downPanelInRight ? 'vertical' : 'horizontal'}
+        primary="second"
+        minSize={downPanelInRight ? 200 : 100}
+        defaultSize={downPanelDefaultSize}
+        resizerChildren={downPanelInRight ? vsplit : hsplit}
+        onDragStarted={onDragStart}
+        onDragFinished={onDragEnd}
+      >
+        {contentPanel}
+        <div style={downPanelStyle}>
+          {downPanel()}
+        </div>
+      </SplitPane>
+    );
+  }
+
+  render() {
+    const {
+      leftPanel, showLeftPanel,
+    } = this.props;
+
+    const rightPanel = this.renderRightPanel();
+
+    const leftPanelDefaultSize = 250;
 
     return (
       <div style={rootStyle}>
-        <SplitPane
-          split="vertical"
-          minSize={leftPanelDefaultSize}
-          defaultSize={leftPanelDefaultSize}
-          resizerChildren={vsplit}
-          onDragStarted={onDragStart}
-          onDragFinished={onDragEnd}
-        >
-          <div style={leftPanelStyle}>
-            {showLeftPanel ? leftPanel() : null}
-          </div>
+        {
+          showLeftPanel
+            ? (
+              <SplitPane
+                key="main-split-pane"
+                split="vertical"
+                minSize={leftPanelDefaultSize}
+                defaultSize={leftPanelDefaultSize}
+                resizerChildren={vsplit}
+                onDragStarted={onDragStart}
+                onDragFinished={onDragEnd}
+              >
+                <div style={leftPanelStyle}>
+                  {leftPanel()}
+                </div>
 
-          <SplitPane
-            split={downPanelInRight ? 'vertical' : 'horizontal'}
-            primary="second"
-            minSize={downPanelInRight ? 200 : 100}
-            defaultSize={downPanelDefaultSize}
-            resizerChildren={downPanelInRight ? vsplit : hsplit}
-            onDragStarted={onDragStart}
-            onDragFinished={onDragEnd}
-          >
-            <div style={contentPanelStyle}>
-              <div style={previewStyle}>
-                {preview()}
-              </div>
-            </div>
-            <div style={downPanelStyle}>
-              {showDownPanel ? downPanel() : null}
-            </div>
-          </SplitPane>
-        </SplitPane>
+                {rightPanel}
+              </SplitPane>
+            )
+            : rightPanel
+        }
       </div>
     );
   }
