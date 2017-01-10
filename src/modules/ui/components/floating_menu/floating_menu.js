@@ -181,6 +181,7 @@ class FloatingMenu extends React.Component {
              style={iconStyle}
              src={svg.fast_rewind}
              alt="previous" title="previous story group"
+             onClick={this.handleOption(features.PREV_KIND)}
            />
            <img
              style={iconStyle}
@@ -198,6 +199,7 @@ class FloatingMenu extends React.Component {
              style={iconStyle}
              src={svg.fast_forward}
              alt="next" title="next story group"
+             onClick={this.handleOption(features.NEXT_KIND)}
            />
          </div>
         </div>

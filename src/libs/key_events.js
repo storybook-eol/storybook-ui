@@ -10,6 +10,8 @@ export const features = {
   PREV_STORY: 7,
   SEARCH: 8,
   DOWN_PANEL_IN_RIGHT: 9,
+  NEXT_KIND: 10,
+  PREV_KIND: 11,
 };
 
 export function isModifierPressed(e) {
