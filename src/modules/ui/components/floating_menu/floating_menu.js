@@ -1,40 +1,26 @@
 import React from 'react';
 import { features } from '../../../../libs/key_events';
-import { baseFonts } from '../theme';
+import { colorScheme, baseFonts } from '../theme';
 import svg from './svg_package';
 
 const TRANSITION = '500ms ease 0ms';
 
-const colorScheme = {
-  bounds: '#d4d4d4',
-  back: '#ebebeb',
-  items: '#fcfcfc',
-  text: baseFonts.color,
-  iconsOpacity: 0.6,
-};
-
 const rootStyle = {
   ...baseFonts,
   fontSize: 12,
-  position: 'fixed',
-  zIndex: 10,
-  left: 10,
-  bottom: 10,
-  backgroundColor: colorScheme.bounds,
-  borderRadius: '4px 4px 0px 0px',
-  boxShadow: '1px 1px 8px rgba(0, 0, 0, 0.5)',
+  backgroundColor: colorScheme.block,
   paddingTop: 4,
+  maxWidth: 400,
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-//  transition: `height ${TRANSITION}`,
+  transition: `height ${TRANSITION}`,
 };
-rootStyle.transition = `height ${TRANSITION}`; // todo: move back
 
-// manage two separate shortcut keys for
-// 'mac' & other (windows, linux) platforms
+
 function getOptionsList(shortcutOptions, platform) {
-  // is it mac platform
+  // manage two separate shortcut keys for
+  // 'mac' & other (windows, linux) platforms
   const isMac = (platform && platform.indexOf('mac') !== -1);
   const keyTemplate = isMac ? ['⌘ ⇧ ', '⌃ ⇧ '] : ['Ctrl + Shift + '];
   const getKeys = (key) => keyTemplate.map(val => val.concat(key)).join(' / ');
@@ -79,7 +65,7 @@ class FloatingMenu extends React.Component {
     super(props);
 
     this.state = {
-      collapsed: false,
+      collapsed: true,
       short: false,
     };
 
@@ -100,7 +86,7 @@ class FloatingMenu extends React.Component {
     const itemStyle = {
       cursor: 'pointer',
       userSelect: 'none',
-      backgroundColor: colorScheme.items,
+      backgroundColor: colorScheme.canvasAlt,
       margin: 4,
       marginBottom: 1,
       marginTop: 1,
@@ -120,8 +106,7 @@ class FloatingMenu extends React.Component {
 
     const blockStyle = {
       overflowY: 'hidden',
-      backgroundColor: colorScheme.back,
-//      padding: 2,
+      backgroundColor: colorScheme.layoutAlt,
     };
 
     const option = (val, key) => (
@@ -143,27 +128,25 @@ class FloatingMenu extends React.Component {
 
     return (
       <div style={blockStyle}>
-        {<div style={{...itemStyle, height: 1}}/>}
+        {<div style={{ ...itemStyle, height: 1 }} />}
         {getOptionsList(this.props.shortcutOptions).map(
           (val, ind) => option(val, ind)
         )}
-        {<div style={{...itemStyle, height: 20}}/>}
+        {<div style={{ ...itemStyle, height: 20 }} />}
       </div>
     );
   }
 
   renderNavigation() {
     const blockStyle = {
-      background: colorScheme.bound,
+      background: colorScheme.block,
       height: 18,
       paddingLeft: 8,
-//      paddingTop: 4,
       display: 'flex',
       justifyContent: 'space-between',
     };
 
     const btnsStyle = {
-//      background: '#c1c1c1',
       display: 'flex',
       justifyContent: 'space-between',
       width: 110,
@@ -174,12 +157,11 @@ class FloatingMenu extends React.Component {
       width: 18,
       marginRight: 8,
       opacity: colorScheme.iconsOpacity,
+      cursor: 'pointer',
     };
 
     const menuStyle = {
-      width: 18,
-      opacity: colorScheme.iconsOpacity,
-      marginRight: 8,
+      ...iconStyle,
       transition: `transform ${TRANSITION}`,
       transform: this.state.collapsed ? 'rotate(0.75turn)' : '',
     };
@@ -231,7 +213,6 @@ class FloatingMenu extends React.Component {
 
     return (
       <div style={blockStyle}>
-        {/* <p>{this.props.selectedKind}{'/'}{this.props.selectedStory}</p>*/}
         {this.renderOptions()}
         {this.renderNavigation()}
       </div>

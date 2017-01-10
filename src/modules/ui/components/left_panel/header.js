@@ -23,6 +23,7 @@ const headingStyle = {
   overflow: 'hidden',
 };
 
+/*
 const shortcutIconStyle = {
   textTransform: 'uppercase',
   letterSpacing: '3.5px',
@@ -42,14 +43,15 @@ const shortcutIconStyle = {
   backgroundColor: 'inherit',
   outline: 0,
 };
+*/
 
 const linkStyle = {
   textDecoration: 'none',
 };
 
-const Header = ({ openShortcutsHelp, name, url }) => (
+const Header = ({/* openShortcutsHelp,*/ name, url }) => (
   <div style={wrapperStyle}>
-    <button style={shortcutIconStyle} onClick={openShortcutsHelp}>⌘</button>
+    {/* <button style={shortcutIconStyle} onClick={openShortcutsHelp}>⌘</button> */}
     <a style={linkStyle} href={url} target="_blank">
       <h3 style={headingStyle}>{name}</h3>
     </a>

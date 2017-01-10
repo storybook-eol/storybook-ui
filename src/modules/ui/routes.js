@@ -16,13 +16,15 @@ export default function (injectDeps, { clientStore, provider, domNode }) {
     return preview;
   };
 
+  const floatingMenu = () => (<FloatingMenu />);
+
   const root = (
     <div>
-      <FloatingMenu />
       <Layout
-        leftPanel={() => (<LeftPanel />)}
+        leftPanel={(menu) => (<LeftPanel floatingMenu={menu} />)}
         preview={() => (<Preview />)}
         downPanel={() => (<DownPanel />)}
+        floatingMenu={floatingMenu}
       />
       <ShortcutsHelp />
       <SearchBox />
