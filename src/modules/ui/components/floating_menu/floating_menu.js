@@ -140,8 +140,8 @@ class FloatingMenu extends React.Component {
   renderNavigation() {
     const blockStyle = {
       background: colorScheme.block,
-      height: 18,
-      paddingLeft: 8,
+      height: 22,
+      paddingLeft: 6,
       display: 'flex',
       justifyContent: 'space-between',
     };
@@ -149,19 +149,19 @@ class FloatingMenu extends React.Component {
     const btnsStyle = {
       display: 'flex',
       justifyContent: 'space-between',
-      width: 110,
       marginRight: 8,
     };
 
     const iconStyle = {
-      width: 18,
-      marginRight: 8,
+      width: 22,
+      margin: '0px 6px',
       opacity: colorScheme.iconsOpacity,
       cursor: 'pointer',
     };
 
     const menuStyle = {
       ...iconStyle,
+      margin: 0,
       transition: `transform ${TRANSITION}`,
       transform: this.state.collapsed ? 'rotate(0.75turn)' : '',
     };
@@ -177,30 +177,34 @@ class FloatingMenu extends React.Component {
          />
 
          <div style={btnsStyle}>
-           <img
-             style={iconStyle}
-             src={svg.fast_rewind}
-             alt="previous" title="previous story group"
-             onClick={this.handleOption(features.PREV_KIND)}
-           />
-           <img
-             style={iconStyle}
-             src={svg.skip_previous}
-             alt="previous" title="previous story"
-             onClick={this.handleOption(features.PREV_STORY)}
-           />
-           <img
-             style={iconStyle}
-             src={svg.skip_next}
-             alt="next" title="next story"
-             onClick={this.handleOption(features.NEXT_STORY)}
-           />
-           <img
-             style={iconStyle}
-             src={svg.fast_forward}
-             alt="next" title="next story group"
-             onClick={this.handleOption(features.NEXT_KIND)}
-           />
+           <div onClick={this.handleOption(features.PREV_KIND)}>
+             <img
+               style={iconStyle}
+               src={svg.fast_rewind}
+               alt="previous" title="previous story group"
+             />
+           </div>
+           <div onClick={this.handleOption(features.PREV_STORY)}>
+             <img
+               style={iconStyle}
+               src={svg.skip_previous}
+               alt="previous" title="previous story"
+             />
+           </div>
+           <div onClick={this.handleOption(features.NEXT_STORY)}>
+             <img
+               style={iconStyle}
+               src={svg.skip_next}
+               alt="next" title="next story"
+             />
+           </div>
+           <div onClick={this.handleOption(features.NEXT_KIND)}>
+             <img
+               style={iconStyle}
+               src={svg.fast_forward}
+               alt="next" title="next story group"
+             />
+           </div>
          </div>
         </div>
       </div>
@@ -210,7 +214,7 @@ class FloatingMenu extends React.Component {
   render() {
     const blockStyle = {
       ...rootStyle,
-      height: this.state.collapsed ? 18 : 132,
+      height: this.state.collapsed ? 22 : 136,
     };
 
     return (
