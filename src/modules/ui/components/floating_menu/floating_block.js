@@ -1,4 +1,5 @@
 import React from 'react';
+import FloatingMenu from '../../containers/floating_menu';
 import { colorScheme, floating } from '../theme';
 import { boxPositions } from '../../../../libs/menu_positions';
 
@@ -6,7 +7,7 @@ const rootStyle = {
   position: 'absolute',
 
   backgroundColor: colorScheme.block,
-  borderRadius: '4px 4px 0px 0px',
+  borderRadius: 2,
   paddingBottom: 2,
   ...floating,
 };
@@ -36,9 +37,11 @@ function getPosition(pos) {
   }
 }
 
-const FloatingBlock = ({ position, children }) => (
+const FloatingBlock = ({ position }) => (
   <div style={{ ...rootStyle, ...getPosition(position) }}>
-    {children}
+    <FloatingMenu
+      downDirection={position === (boxPositions.TOP_LEFT || boxPositions.TOP_RIGHT)}
+    />
   </div>
 );
 

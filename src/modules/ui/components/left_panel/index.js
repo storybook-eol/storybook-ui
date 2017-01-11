@@ -36,14 +36,12 @@ const LeftPanel = (props) => (
         onClear={() => props.onStoryFilter('')}
         onChange={(text) => props.onStoryFilter(text)}
       />
+      <Footer />
     </div>
+
     <div style={scrollStyle}>
       {props.stories ? (<Stories {...pick(props, storyProps)} />) : null}
     </div>
-    <Footer>
-      {props.floatingMenu()}
-    </Footer>
-
   </div>
 );
 
@@ -59,8 +57,6 @@ LeftPanel.propTypes = {
   openShortcutsHelp: React.PropTypes.func,
   name: React.PropTypes.string,
   url: React.PropTypes.string,
-
-  floatingMenu: React.PropTypes.func,
 };
 
 export default LeftPanel;

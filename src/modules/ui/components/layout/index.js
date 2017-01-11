@@ -78,7 +78,6 @@ class Layout extends React.Component {
       downPanel,
       leftPanel,
       preview,
-      floatingMenu,
       showFloatingBox,
       floatingBoxPosition,
     } = this.props;
@@ -109,7 +108,7 @@ class Layout extends React.Component {
         >
 
           <div style={leftPanelStyle}>
-            {showLeftPanel ? leftPanel(floatingMenu) : null}
+            {showLeftPanel ? leftPanel() : null}
           </div>
 
           <SplitPane
@@ -125,9 +124,7 @@ class Layout extends React.Component {
               <div style={previewStyle}>
                 {preview()}
                 {showFloatingBlock ?
-                  <FloatingBlock position={floatingBoxPosition}>
-                   {floatingMenu()}
-                  </FloatingBlock>
+                  <FloatingBlock position={floatingBoxPosition} />
                   : null
                 }
               </div>
@@ -155,7 +152,6 @@ Layout.propTypes = {
   leftPanel: React.PropTypes.func.isRequired,
   preview: React.PropTypes.func.isRequired,
   downPanel: React.PropTypes.func.isRequired,
-  floatingMenu: React.PropTypes.func.isRequired,
 };
 
 export default Layout;

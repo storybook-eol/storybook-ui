@@ -1,7 +1,7 @@
 export const colorScheme = {
-  block: '#e2e2e2', // '#d4d4d4'
-  layoutAlt: '#efefef', // '#ebebeb',
-  canvasAlt: '#ffffff', // '#fcfcfc'
+  block: '#e2e2e2',
+  layoutAlt: '#f7f7f7',
+  canvasAlt: '#ffffff',
 
   text: '#444',
   layout: '#f7f7f7',

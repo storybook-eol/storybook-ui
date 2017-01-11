@@ -11,6 +11,7 @@ export const mapper = (state, props, { actions }) => {
     selectedStory,
     shortcutOptions,
     emulShortcuts: actionMap.shortcuts.handleEvent,
+    openShortcutsHelp: actionMap.ui.toggleShortcutsHelp,
   };
 
   return data;

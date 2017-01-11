@@ -3,7 +3,7 @@ import { features } from '../../../../libs/key_events';
 import { colorScheme, baseFonts } from '../theme';
 import svg from './svg_package';
 
-const TRANSITION = '500ms ease 0ms';
+const TRANSITION = '100ms linear 0ms';
 
 const rootStyle = {
   ...baseFonts,
@@ -125,13 +125,27 @@ class FloatingMenu extends React.Component {
         </div>
     );
 
+    const shorcuts = (
+        <div
+          style={itemStyle}
+          onClick={this.props.openShortcutsHelp}
+        >
+         <img
+           style={iconStyle}
+           src={svg.help}
+           alt="?"
+         />
+         <span>Keyboard Shortcuts</span>
+        </div>
+    );
 
     return (
-      <div style={blockStyle}>
+      <div style={blockStyle} key="options">
         {<div style={{ ...itemStyle, height: 1 }} />}
         {getOptionsList(this.props.shortcutOptions).map(
           (val, ind) => option(val, ind)
         )}
+        {shorcuts}
         {<div style={{ ...itemStyle, height: 20 }} />}
       </div>
     );
@@ -163,11 +177,11 @@ class FloatingMenu extends React.Component {
       ...iconStyle,
       margin: 0,
       transition: `transform ${TRANSITION}`,
-      transform: this.state.collapsed ? 'rotate(0.75turn)' : '',
+      transform: this.state.collapsed ? 'rotate(-0.25turn)' : '',
     };
 
     return (
-      <div>
+      <div key="navigation">
         <div style={blockStyle}>
          <img
            style={menuStyle}
@@ -214,13 +228,13 @@ class FloatingMenu extends React.Component {
   render() {
     const blockStyle = {
       ...rootStyle,
-      height: this.state.collapsed ? 22 : 136,
+      height: this.state.collapsed ? 22 : 158, // note: 158 = 26 + 22 * num_of_items
     };
+    const content = [this.renderOptions(), this.renderNavigation()];
 
     return (
       <div style={blockStyle}>
-        {this.renderOptions()}
-        {this.renderNavigation()}
+        {this.props.downDirection ? content.reverse() : content}
       </div>
     );
   }
@@ -231,6 +245,12 @@ FloatingMenu.propTypes = {
   selectedStory: React.PropTypes.string,
   shortcutOptions: React.PropTypes.object,
   emulShortcuts: React.PropTypes.func,
+  openShortcutsHelp: React.PropTypes.func,
+  downDirection: React.PropTypes.bool,
+};
+
+FloatingMenu.defaultProps = {
+  downDirection: false,
 };
 
 export default FloatingMenu;
