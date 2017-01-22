@@ -36,7 +36,6 @@ const Header = ({ name, url }) => (
 );
 
 Header.propTypes = {
-  openShortcutsHelp: React.PropTypes.func,
   name: React.PropTypes.string,
   url: React.PropTypes.string,
 };

@@ -115,6 +115,7 @@ class FloatingMenu extends React.Component {
           style={itemStyle}
           onClick={this.handleOption(val.event)}
           title={val.keys}
+          className="floating-menu-button"
         >
          <img
            style={iconStyle}
@@ -129,6 +130,7 @@ class FloatingMenu extends React.Component {
         <div
           style={itemStyle}
           onClick={this.props.openShortcutsHelp}
+          className="floating-menu-button"
         >
          <img
            style={iconStyle}

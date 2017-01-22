@@ -164,7 +164,8 @@ var FloatingMenu = function (_React$Component) {
             key: key,
             style: itemStyle,
             onClick: _this3.handleOption(val.event),
-            title: val.keys
+            title: val.keys,
+            className: 'floating-menu-button'
           },
           _react2.default.createElement('img', {
             style: iconStyle,
@@ -183,7 +184,8 @@ var FloatingMenu = function (_React$Component) {
         'div',
         {
           style: itemStyle,
-          onClick: this.props.openShortcutsHelp
+          onClick: this.props.openShortcutsHelp,
+          className: 'floating-menu-button'
         },
         _react2.default.createElement('img', {
           style: iconStyle,

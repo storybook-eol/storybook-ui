@@ -14,17 +14,17 @@ var _keycode2 = _interopRequireDefault(_keycode);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var features = exports.features = {
-  FULLSCREEN: 1,
-  DOWN_PANEL: 2,
-  LEFT_PANEL: 3,
-  SHORTCUTS_HELP: 4,
-  ESCAPE: 5,
-  NEXT_STORY: 6,
-  PREV_STORY: 7,
-  SEARCH: 8,
-  DOWN_PANEL_IN_RIGHT: 9,
-  NEXT_KIND: 10,
-  PREV_KIND: 11
+  FULLSCREEN: 'FULLSCREEN',
+  DOWN_PANEL: 'DOWN_PANEL',
+  LEFT_PANEL: 'LEFT_PANEL',
+  SHORTCUTS_HELP: 'SHORTCUTS_HELP',
+  ESCAPE: 'ESCAPE',
+  NEXT_STORY: 'NEXT_STORY',
+  PREV_STORY: 'PREV_STORY',
+  SEARCH: 'SEARCH',
+  DOWN_PANEL_IN_RIGHT: 'DOWN_PANEL_IN_RIGHT',
+  NEXT_KIND: 'NEXT_KIND',
+  PREV_KIND: 'PREV_KIND'
 };
 
 function isModifierPressed(e) {

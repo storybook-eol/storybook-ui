@@ -23,7 +23,7 @@ var rootStyle = {
   marginTop: 10
 };
 
-var Footer = function Footer() {
+var Menu = function Menu() {
   return _react2.default.createElement(
     'div',
     { style: rootStyle },
@@ -31,8 +31,4 @@ var Footer = function Footer() {
   );
 };
 
-Footer.propTypes = {
-  children: _react2.default.PropTypes.element
-};
-
-exports.default = Footer;
+exports.default = Menu;

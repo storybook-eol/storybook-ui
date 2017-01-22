@@ -67,8 +67,7 @@ var FloatingBlock = function FloatingBlock(_ref) {
 };
 
 FloatingBlock.propTypes = {
-  position: _react2.default.PropTypes.string,
-  children: _react2.default.PropTypes.element
+  position: _react2.default.PropTypes.string
 };
 
 exports.default = FloatingBlock;

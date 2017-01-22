@@ -9,14 +9,10 @@ const rootStyle = {
   marginTop: 10,
 };
 
-const Footer = () => (
+const Menu = () => (
   <div style={rootStyle}>
     <FloatingMenu downDirection />
   </div>
 );
 
-Footer.propTypes = {
-  children: React.PropTypes.element,
-};
-
-export default Footer;
+export default Menu;

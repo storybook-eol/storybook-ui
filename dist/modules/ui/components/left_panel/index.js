@@ -12,9 +12,9 @@ var _header = require('./header');
 
 var _header2 = _interopRequireDefault(_header);
 
-var _footer = require('./footer');
+var _menu = require('./menu');
 
-var _footer2 = _interopRequireDefault(_footer);
+var _menu2 = _interopRequireDefault(_menu);
 
 var _stories = require('./stories');
 
@@ -69,7 +69,7 @@ var LeftPanel = function LeftPanel(props) {
           return props.onStoryFilter(text);
         }
       }),
-      _react2.default.createElement(_footer2.default, null)
+      _react2.default.createElement(_menu2.default, null)
     ),
     _react2.default.createElement(
       'div',

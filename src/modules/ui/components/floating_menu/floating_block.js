@@ -47,7 +47,6 @@ const FloatingBlock = ({ position }) => (
 
 FloatingBlock.propTypes = {
   position: React.PropTypes.string,
-  children: React.PropTypes.element,
 };
 
 export default FloatingBlock;

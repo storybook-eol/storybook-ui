@@ -60,7 +60,6 @@ var Header = function Header(_ref) {
 };
 
 Header.propTypes = {
-  openShortcutsHelp: _react2.default.PropTypes.func,
   name: _react2.default.PropTypes.string,
   url: _react2.default.PropTypes.string
 };
