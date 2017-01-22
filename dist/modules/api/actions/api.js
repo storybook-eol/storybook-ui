@@ -50,6 +50,24 @@ function _jumpToStory(storyKinds, selectedKind, selectedStory, direction) {
 }
 
 exports.jumpToStory = _jumpToStory;
+function _jumpToKind(storyKinds, selectedKind, selectedStory, direction) {
+  var currentIndex = storyKinds.findIndex(function (_ref2) {
+    var kind = _ref2.kind;
+    return kind === selectedKind;
+  });
+  if (currentIndex === -1) return { selectedKind: selectedKind, selectedStory: selectedStory };
+
+  var jumpedStoryKind = storyKinds[currentIndex + direction];
+
+  var jumpedKind = jumpedStoryKind ? jumpedStoryKind.kind : selectedKind;
+  var jumpedStory = jumpedStoryKind ? jumpedStoryKind.stories[0] : selectedStory;
+
+  return {
+    selectedKind: jumpedKind,
+    selectedStory: jumpedStory
+  };
+}
+
 function ensureKind(storyKinds, selectedKind) {
   if (!storyKinds) return selectedKind;
 
@@ -81,8 +99,8 @@ function ensureStory(storyKinds, selectedKind, selectedStory) {
 }
 
 exports.default = {
-  setStories: function setStories(_ref2, stories) {
-    var clientStore = _ref2.clientStore;
+  setStories: function setStories(_ref3, stories) {
+    var clientStore = _ref3.clientStore;
 
     clientStore.update(function (state) {
       var selectedKind = ensureKind(stories, state.selectedKind);
@@ -96,8 +114,8 @@ exports.default = {
       };
     });
   },
-  selectStory: function selectStory(_ref3, kind, story) {
-    var clientStore = _ref3.clientStore;
+  selectStory: function selectStory(_ref4, kind, story) {
+    var clientStore = _ref4.clientStore;
 
     clientStore.update(function (state) {
       var selectedKind = ensureKind(state.stories, kind);
@@ -106,15 +124,29 @@ exports.default = {
       return { selectedKind: selectedKind, selectedStory: selectedStory };
     });
   },
-  jumpToStory: function jumpToStory(_ref4, direction) {
-    var clientStore = _ref4.clientStore;
+  jumpToStory: function jumpToStory(_ref5, direction) {
+    var clientStore = _ref5.clientStore;
 
     clientStore.update(function (state) {
       return _jumpToStory(state.stories, state.selectedKind, state.selectedStory, direction);
     });
   },
-  setOptions: function setOptions(_ref5, options) {
-    var clientStore = _ref5.clientStore;
+  jumpToKind: function jumpToKind(_ref6, direction) {
+    var clientStore = _ref6.clientStore;
+
+    clientStore.update(function (state) {
+      var _jumpToKind2 = _jumpToKind(state.stories, state.selectedKind, state.selectedStory, direction),
+          selectedKind = _jumpToKind2.selectedKind,
+          selectedStory = _jumpToKind2.selectedStory;
+
+      selectedKind = ensureKind(state.stories, selectedKind);
+      selectedStory = ensureStory(state.stories, selectedKind, selectedStory);
+
+      return { selectedKind: selectedKind, selectedStory: selectedStory };
+    });
+  },
+  setOptions: function setOptions(_ref7, options) {
+    var clientStore = _ref7.clientStore;
 
     clientStore.update(function (state) {
       var newOptions = (0, _lodash2.default)(options, (0, _keys2.default)(state.uiOptions));
@@ -123,8 +155,8 @@ exports.default = {
       return { uiOptions: updatedOptions };
     });
   },
-  setQueryParams: function setQueryParams(_ref6, customQueryParams) {
-    var clientStore = _ref6.clientStore;
+  setQueryParams: function setQueryParams(_ref8, customQueryParams) {
+    var clientStore = _ref8.clientStore;
 
     clientStore.update(function (state) {
       var updatedQueryParams = (0, _extends3.default)({}, state.customQueryParams, customQueryParams);

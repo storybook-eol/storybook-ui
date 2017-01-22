@@ -22,7 +22,9 @@ var features = exports.features = {
   NEXT_STORY: 6,
   PREV_STORY: 7,
   SEARCH: 8,
-  DOWN_PANEL_IN_RIGHT: 9
+  DOWN_PANEL_IN_RIGHT: 9,
+  NEXT_KIND: 10,
+  PREV_KIND: 11
 };
 
 function isModifierPressed(e) {

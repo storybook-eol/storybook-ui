@@ -40,6 +40,10 @@ var _reactSplitPane = require('@kadira/react-split-pane');
 
 var _reactSplitPane2 = _interopRequireDefault(_reactSplitPane);
 
+var _floating_block = require('../floating_menu/floating_block');
+
+var _floating_block2 = _interopRequireDefault(_floating_block);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var rootStyle = {
@@ -122,8 +126,12 @@ var Layout = function (_React$Component) {
           downPanelInRight = _props.downPanelInRight,
           downPanel = _props.downPanel,
           leftPanel = _props.leftPanel,
-          preview = _props.preview;
+          preview = _props.preview,
+          showFloatingBox = _props.showFloatingBox,
+          floatingBoxPosition = _props.floatingBoxPosition;
 
+
+      var showFloatingBlock = showFloatingBox && (goFullScreen || !showLeftPanel);
 
       var previewStyle = normalPreviewStyle;
 
@@ -172,7 +180,8 @@ var Layout = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { style: previewStyle },
-                preview()
+                preview(),
+                showFloatingBlock ? _react2.default.createElement(_floating_block2.default, { position: floatingBoxPosition }) : null
               )
             ),
             _react2.default.createElement(
@@ -192,10 +201,13 @@ Layout.propTypes = {
   showLeftPanel: _react2.default.PropTypes.bool.isRequired,
   showDownPanel: _react2.default.PropTypes.bool.isRequired,
   goFullScreen: _react2.default.PropTypes.bool.isRequired,
+  downPanelInRight: _react2.default.PropTypes.bool.isRequired,
+  showFloatingBox: _react2.default.PropTypes.bool.isRequired,
+  floatingBoxPosition: _react2.default.PropTypes.string.isRequired,
+
   leftPanel: _react2.default.PropTypes.func.isRequired,
   preview: _react2.default.PropTypes.func.isRequired,
-  downPanel: _react2.default.PropTypes.func.isRequired,
-  downPanelInRight: _react2.default.PropTypes.bool.isRequired
+  downPanel: _react2.default.PropTypes.func.isRequired
 };
 
 exports.default = Layout;

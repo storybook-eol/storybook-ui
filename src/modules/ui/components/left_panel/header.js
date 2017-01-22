@@ -23,35 +23,12 @@ const headingStyle = {
   overflow: 'hidden',
 };
 
-/*
-const shortcutIconStyle = {
-  textTransform: 'uppercase',
-  letterSpacing: '3.5px',
-  fontSize: 12,
-  fontWeight: 'bolder',
-  color: 'rgb(130, 130, 130)',
-  border: '1px solid rgb(193, 193, 193)',
-  textAlign: 'center',
-  borderRadius: 2,
-  padding: 5,
-  cursor: 'pointer',
-  margin: 0,
-  display: 'inlineBlock',
-  paddingLeft: 8,
-  float: 'right',
-  marginLeft: 5,
-  backgroundColor: 'inherit',
-  outline: 0,
-};
-*/
-
 const linkStyle = {
   textDecoration: 'none',
 };
 
-const Header = ({/* openShortcutsHelp,*/ name, url }) => (
+const Header = ({ name, url }) => (
   <div style={wrapperStyle}>
-    {/* <button style={shortcutIconStyle} onClick={openShortcutsHelp}>⌘</button> */}
     <a style={linkStyle} href={url} target="_blank">
       <h3 style={headingStyle}>{name}</h3>
     </a>

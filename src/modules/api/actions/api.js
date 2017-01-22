@@ -26,7 +26,7 @@ export function jumpToStory(storyKinds, selectedKind, selectedStory, direction) 
 
 function jumpToKind(storyKinds, selectedKind, selectedStory, direction) {
   const currentIndex = storyKinds.findIndex(({ kind }) => (kind === selectedKind));
-  if (currentIndex === -1) return selectedKind;
+  if (currentIndex === -1) return { selectedKind, selectedStory };
 
   const jumpedStoryKind = storyKinds[currentIndex + direction];
 

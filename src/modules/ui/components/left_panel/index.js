@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './header';
-import Footer from './footer';
+import Menu from './menu';
 import Stories from './stories';
 import TextFilter from './text_filter';
 import pick from 'lodash.pick';
@@ -36,7 +36,7 @@ const LeftPanel = (props) => (
         onClear={() => props.onStoryFilter('')}
         onChange={(text) => props.onStoryFilter(text)}
       />
-      <Footer />
+      <Menu />
     </div>
 
     <div style={scrollStyle}>

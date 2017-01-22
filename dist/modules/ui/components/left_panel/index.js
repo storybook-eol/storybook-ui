@@ -12,6 +12,10 @@ var _header = require('./header');
 
 var _header2 = _interopRequireDefault(_header);
 
+var _footer = require('./footer');
+
+var _footer2 = _interopRequireDefault(_footer);
+
 var _stories = require('./stories');
 
 var _stories2 = _interopRequireDefault(_stories);
@@ -27,13 +31,19 @@ var _lodash2 = _interopRequireDefault(_lodash);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var scrollStyle = {
-  height: 'calc(100vh - 105px)',
+  //  height: 'calc(100vh - 105px)',
+  flexGrow: 1,
   marginTop: 10,
+  marginLeft: 10,
   overflowY: 'auto'
 };
 
 var mainStyle = {
-  padding: '10px 0 10px 10px'
+  //  padding: '10px 0 10px 10px',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  height: '100%'
 };
 
 var storyProps = ['stories', 'selectedKind', 'selectedStory', 'onSelectStory'];
@@ -42,20 +52,25 @@ var LeftPanel = function LeftPanel(props) {
   return _react2.default.createElement(
     'div',
     { style: mainStyle },
-    _react2.default.createElement(_header2.default, {
-      name: props.name,
-      url: props.url,
-      openShortcutsHelp: props.openShortcutsHelp
-    }),
-    _react2.default.createElement(_text_filter2.default, {
-      text: props.storyFilter,
-      onClear: function onClear() {
-        return props.onStoryFilter('');
-      },
-      onChange: function onChange(text) {
-        return props.onStoryFilter(text);
-      }
-    }),
+    _react2.default.createElement(
+      'div',
+      { style: { padding: 10, paddingRight: 0 } },
+      _react2.default.createElement(_header2.default, {
+        name: props.name,
+        url: props.url,
+        openShortcutsHelp: props.openShortcutsHelp
+      }),
+      _react2.default.createElement(_text_filter2.default, {
+        text: props.storyFilter,
+        onClear: function onClear() {
+          return props.onStoryFilter('');
+        },
+        onChange: function onChange(text) {
+          return props.onStoryFilter(text);
+        }
+      }),
+      _react2.default.createElement(_footer2.default, null)
+    ),
     _react2.default.createElement(
       'div',
       { style: scrollStyle },
