@@ -133,6 +133,7 @@ class Layout extends React.Component {
           resizerChildren={vsplit}
           onDragStarted={onDragStart}
           onDragFinished={onDragEnd}
+          onChange={this.onResize}
         >
           <div style={leftPanelStyle}>
             {showLeftPanel ? leftPanel() : null}
@@ -146,6 +147,7 @@ class Layout extends React.Component {
             resizerChildren={downPanelInRight ? vsplit : hsplit}
             onDragStarted={onDragStart}
             onDragFinished={onDragEnd}
+            onChange={this.onResize}
           >
             <div style={contentPanelStyle}>
               <div
