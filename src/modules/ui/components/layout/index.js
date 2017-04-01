@@ -3,6 +3,7 @@ import React from 'react';
 import VSplit from './vsplit';
 import HSplit from './hsplit';
 import SplitPane from '@kadira/react-split-pane';
+import FloatingBlock from '../floating_menu/floating_block';
 
 const rootStyle = {
   height: '100vh',
@@ -70,9 +71,18 @@ const onDragEnd = function () {
 class Layout extends React.Component {
   render() {
     const {
-      goFullScreen, showLeftPanel, showDownPanel, downPanelInRight,
-      downPanel, leftPanel, preview,
+      goFullScreen,
+      showLeftPanel,
+      showDownPanel,
+      downPanelInRight,
+      downPanel,
+      leftPanel,
+      preview,
+      showFloatingBox,
+      floatingBoxPosition,
     } = this.props;
+
+    const showFloatingBlock = showFloatingBox && (goFullScreen || !showLeftPanel);
 
     let previewStyle = normalPreviewStyle;
 
@@ -96,6 +106,7 @@ class Layout extends React.Component {
           onDragStarted={onDragStart}
           onDragFinished={onDragEnd}
         >
+
           <div style={leftPanelStyle}>
             {showLeftPanel ? leftPanel() : null}
           </div>
@@ -112,11 +123,17 @@ class Layout extends React.Component {
             <div style={contentPanelStyle}>
               <div style={previewStyle}>
                 {preview()}
+                {showFloatingBlock ?
+                  <FloatingBlock position={floatingBoxPosition} />
+                  : null
+                }
               </div>
             </div>
+
             <div style={downPanelStyle}>
               {showDownPanel ? downPanel() : null}
             </div>
+
           </SplitPane>
         </SplitPane>
       </div>
@@ -128,10 +145,13 @@ Layout.propTypes = {
   showLeftPanel: React.PropTypes.bool.isRequired,
   showDownPanel: React.PropTypes.bool.isRequired,
   goFullScreen: React.PropTypes.bool.isRequired,
+  downPanelInRight: React.PropTypes.bool.isRequired,
+  showFloatingBox: React.PropTypes.bool.isRequired,
+  floatingBoxPosition: React.PropTypes.string.isRequired,
+
   leftPanel: React.PropTypes.func.isRequired,
   preview: React.PropTypes.func.isRequired,
   downPanel: React.PropTypes.func.isRequired,
-  downPanelInRight: React.PropTypes.bool.isRequired,
 };
 
 export default Layout;

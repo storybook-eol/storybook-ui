@@ -24,13 +24,19 @@ var _handle_keyevents = require('./configs/handle_keyevents');
 
 var _handle_keyevents2 = _interopRequireDefault(_handle_keyevents);
 
+var _menu_positions = require('../../libs/menu_positions');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
   routes: _routes2.default,
   actions: _actions2.default,
   defaultState: {
-    showShortcutsHelp: false
+    showShortcutsHelp: false,
+    floatingBoxOptions: {
+      showFloatingBox: true,
+      floatingBoxPosition: _menu_positions.boxPositions.BOTTOM_LEFT
+    }
   },
   load: function load(c, a) {
     (0, _init_panels2.default)(c, a);

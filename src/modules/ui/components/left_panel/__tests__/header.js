@@ -3,14 +3,17 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Header from '../header.js';
 import { expect } from 'chai';
-import sinon from 'sinon';
 
 describe('manager.ui.components.left_panel.header', () => {
-  it('should fire openShortcutsHelp when clicked on shortcut button', () => {
-    const openShortcutsHelp = sinon.stub();
-    const wrap = shallow(<Header openShortcutsHelp={openShortcutsHelp} />);
+  it('should render the Title and URL', function () {
+    const title = 'Storybook UI';
+    const url = 'www.example.com';
+    const wrap = shallow(<Header name={title} url={url} />);
 
-    wrap.find('button').simulate('click');
-    expect(openShortcutsHelp.callCount).to.be.equal(1);
+    const h3 = wrap.find('h3').first();
+    expect(h3.text()).to.equal(title);
+
+    const link = wrap.find('a').first();
+    expect(link.props().href).to.equal(url);
   });
 });

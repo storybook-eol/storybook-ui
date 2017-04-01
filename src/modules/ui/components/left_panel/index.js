@@ -1,33 +1,44 @@
 import React from 'react';
 import Header from './header';
+import Menu from './menu';
 import Stories from './stories';
 import TextFilter from './text_filter';
 import pick from 'lodash.pick';
 
 const scrollStyle = {
-  height: 'calc(100vh - 105px)',
+//  height: 'calc(100vh - 105px)',
+  flexGrow: 1,
   marginTop: 10,
+  marginLeft: 10,
   overflowY: 'auto',
 };
 
 const mainStyle = {
-  padding: '10px 0 10px 10px',
+//  padding: '10px 0 10px 10px',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  height: '100%',
 };
 
 const storyProps = ['stories', 'selectedKind', 'selectedStory', 'onSelectStory'];
 
 const LeftPanel = (props) => (
   <div style={mainStyle}>
-    <Header
-      name={props.name}
-      url={props.url}
-      openShortcutsHelp={props.openShortcutsHelp}
-    />
-    <TextFilter
-      text={props.storyFilter}
-      onClear={() => props.onStoryFilter('')}
-      onChange={(text) => props.onStoryFilter(text)}
-    />
+    <div style={{ padding: 10, paddingRight: 0 }}>
+      <Header
+        name={props.name}
+        url={props.url}
+        openShortcutsHelp={props.openShortcutsHelp}
+      />
+      <TextFilter
+        text={props.storyFilter}
+        onClear={() => props.onStoryFilter('')}
+        onChange={(text) => props.onStoryFilter(text)}
+      />
+      <Menu />
+    </div>
+
     <div style={scrollStyle}>
       {props.stories ? (<Stories {...pick(props, storyProps)} />) : null}
     </div>

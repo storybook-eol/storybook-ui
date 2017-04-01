@@ -29,6 +29,12 @@ export default {
       case features.PREV_STORY:
         apiActions.api.jumpToStory(context, -1);
         break;
+      case features.NEXT_KIND:
+        apiActions.api.jumpToKind(context, 1);
+        break;
+      case features.PREV_KIND:
+        apiActions.api.jumpToKind(context, -1);
+        break;
       default:
         clientStore.update((state) => {
           const newOptions = keyEventToOptions(state.shortcutOptions, event);
