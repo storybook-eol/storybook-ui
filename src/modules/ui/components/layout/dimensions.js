@@ -31,6 +31,8 @@ class Dimensions extends React.Component {
     this.state = {
       isVisible: false,
     };
+
+    this._hideTimeout = null;
   }
 
   componentWillReceiveProps({ width, height }) {
@@ -39,10 +41,14 @@ class Dimensions extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    clearTimeout(this._hideTimeout);
+  }
+
   onChange(width, height) {
     this.setState({ isVisible: true });
 
-    setTimeout(() => {
+    this._hideTimeout = setTimeout(() => {
       // Ensure the dimensions aren't still changing
       if (width === this.props.width && height === this.props.height) {
         this.setState({ isVisible: false });
