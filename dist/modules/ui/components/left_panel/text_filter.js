@@ -39,7 +39,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mainStyle = (0, _extends3.default)({}, _theme.baseFonts, {
   border: '1px solid #ECECEC',
   borderRadius: 2,
-  position: 'relative'
+  position: 'relative',
+  marginBottom: '10px'
 });
 
 var TextFilter = function (_React$Component) {

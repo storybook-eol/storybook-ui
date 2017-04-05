@@ -8,17 +8,22 @@ const listStyle = {
 const listStyleType = {
   listStyleType: 'none',
   paddingLeft: 0,
+  margin: 'auto',
 };
 
 const kindStyle = {
-  fontSize: 15,
+  fontSize: '15px',
+  color: 'inherit',
+  textDecoration: 'none',
   padding: '10px 0px',
   cursor: 'pointer',
   borderBottom: '1px solid #EEE',
 };
 
 const storyStyle = {
-  fontSize: 13,
+  fontSize: '13px',
+  color: 'inherit',
+  textDecoration: 'none',
   padding: '8px 0px 8px 10px',
   cursor: 'pointer',
 };
@@ -53,7 +58,7 @@ class Stories extends React.Component {
 
     return (
       <li key={story}>
-        <a title={`Open ${story}`} style={style} onClick={props.onClick}>
+        <a href="#" title={`Open ${story}`} style={style} onClick={props.onClick}>
           {story}
         </a>
       </li>
@@ -69,7 +74,7 @@ class Stories extends React.Component {
       style.fontWeight = 'bold';
       return (
         <li key={kind}>
-          <a title={`Open ${kind}`} style={style} onClick={onClick}>
+          <a href="#" title={`Open ${kind}`} style={style} onClick={onClick}>
             {kind}
           </a>
           <div>
@@ -83,7 +88,7 @@ class Stories extends React.Component {
 
     return (
       <li key={kind}>
-        <a title={`Open ${kind}`} style={style} onClick={onClick}>
+        <a href="#" title={`Open ${kind}`} style={style} onClick={onClick}>
           {kind}
         </a>
       </li>

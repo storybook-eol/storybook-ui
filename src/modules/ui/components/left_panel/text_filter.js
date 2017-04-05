@@ -6,6 +6,7 @@ const mainStyle = {
   border: '1px solid #ECECEC',
   borderRadius: 2,
   position: 'relative',
+  marginBottom: '10px',
 };
 
 export default class TextFilter extends React.Component {

@@ -1,6 +1,6 @@
 const { describe, it } = global;
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import LeftPanel from '../index';
 import Header from '../header';
 import TextFilter from '../text_filter';
@@ -13,7 +13,7 @@ describe('manager.ui.components.left_panel.index', () => {
     const openShortcutsHelp = sinon.stub();
     const storyFilter = 'xxxxx';
 
-    const wrap = shallow(
+    const wrap = mount(
       <LeftPanel
         openShortcutsHelp={openShortcutsHelp}
         storyFilter={storyFilter}
@@ -35,7 +35,7 @@ describe('manager.ui.components.left_panel.index', () => {
       { kind: 'kk', stories: ['bb'] },
     ];
 
-    const wrap = shallow(
+    const wrap = mount(
       <LeftPanel
         stories={stories}
         selectedKind={selectedKind}
@@ -54,7 +54,7 @@ describe('manager.ui.components.left_panel.index', () => {
     it('should set filter as an empty text on TextFilter.onClear', () => {
       const onStoryFilter = sinon.stub();
 
-      const wrap = shallow(
+      const wrap = mount(
         <LeftPanel
           onStoryFilter={onStoryFilter}
         />
@@ -70,7 +70,7 @@ describe('manager.ui.components.left_panel.index', () => {
       const onStoryFilter = sinon.stub();
       const filterText = 'XXX';
 
-      const wrap = shallow(
+      const wrap = mount(
         <LeftPanel
           onStoryFilter={onStoryFilter}
         />

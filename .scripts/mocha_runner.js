@@ -7,6 +7,9 @@
 require('babel-core/register');
 require('babel-polyfill');
 
+// Adds window.matchMedia support 
+var matchMedia = require('matchmedia');
+
 // Add jsdom support, which is required for enzyme.
 var jsdom = require('jsdom').jsdom;
 
@@ -24,6 +27,8 @@ Object.keys(document.defaultView).forEach((property) => {
 global.navigator = {
   userAgent: 'node.js'
 };
+
+global.window.matchMedia = matchMedia;
 
 process.on('unhandledRejection', function (error) {
   console.error('Unhandled Promise Rejection:');
