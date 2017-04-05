@@ -40,18 +40,23 @@ var listStyle = (0, _extends3.default)({}, _theme.baseFonts);
 
 var listStyleType = {
   listStyleType: 'none',
-  paddingLeft: 0
+  paddingLeft: 0,
+  margin: 'auto'
 };
 
 var kindStyle = {
-  fontSize: 15,
+  fontSize: '15px',
+  color: 'inherit',
+  textDecoration: 'none',
   padding: '10px 0px',
   cursor: 'pointer',
   borderBottom: '1px solid #EEE'
 };
 
 var storyStyle = {
-  fontSize: 13,
+  fontSize: '13px',
+  color: 'inherit',
+  textDecoration: 'none',
   padding: '8px 0px 8px 10px',
   cursor: 'pointer'
 };
@@ -110,7 +115,7 @@ var Stories = function (_React$Component) {
         { key: story },
         _react2.default.createElement(
           'a',
-          { title: 'Open ' + story, style: style, onClick: props.onClick },
+          { href: '#', title: 'Open ' + story, style: style, onClick: props.onClick },
           story
         )
       );
@@ -132,7 +137,7 @@ var Stories = function (_React$Component) {
           { key: kind },
           _react2.default.createElement(
             'a',
-            { title: 'Open ' + kind, style: style, onClick: onClick },
+            { href: '#', title: 'Open ' + kind, style: style, onClick: onClick },
             kind
           ),
           _react2.default.createElement(
@@ -152,7 +157,7 @@ var Stories = function (_React$Component) {
         { key: kind },
         _react2.default.createElement(
           'a',
-          { title: 'Open ' + kind, style: style, onClick: onClick },
+          { href: '#', title: 'Open ' + kind, style: style, onClick: onClick },
           kind
         )
       );

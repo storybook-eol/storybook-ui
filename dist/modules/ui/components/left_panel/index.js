@@ -24,24 +24,35 @@ var _lodash = require('lodash.pick');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _lodash3 = require('lodash.isstring');
+
+var _lodash4 = _interopRequireDefault(_lodash3);
+
+var _reactMedia = require('react-media');
+
+var _reactMedia2 = _interopRequireDefault(_reactMedia);
+
+var _collapsible = require('../collapsible');
+
+var _collapsible2 = _interopRequireDefault(_collapsible);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var scrollStyle = {
   height: 'calc(100vh - 105px)',
-  marginTop: 10,
-  overflowY: 'auto'
+  overflow: 'auto'
 };
 
-var mainStyle = {
-  padding: '10px 0 10px 10px'
+var mobileScrollStyle = {
+  maxHeight: 'calc(100vw + 100px)',
+  overflow: 'auto'
 };
 
-var storyProps = ['stories', 'selectedKind', 'selectedStory', 'onSelectStory'];
-
-var LeftPanel = function LeftPanel(props) {
+/* eslint-disable react/prop-types */
+var HeaderAndFilter = function HeaderAndFilter(props) {
   return _react2.default.createElement(
     'div',
-    { style: mainStyle },
+    null,
     _react2.default.createElement(_header2.default, {
       name: props.name,
       url: props.url,
@@ -55,12 +66,45 @@ var LeftPanel = function LeftPanel(props) {
       onChange: function onChange(text) {
         return props.onStoryFilter(text);
       }
-    }),
-    _react2.default.createElement(
-      'div',
-      { style: scrollStyle },
-      props.stories ? _react2.default.createElement(_stories2.default, (0, _lodash2.default)(props, storyProps)) : null
-    )
+    })
+  );
+};
+/* eslint-enable react/prop-types */
+
+var storyProps = ['stories', 'selectedKind', 'selectedStory', 'onSelectStory'];
+
+var LeftPanel = function LeftPanel(props) {
+  return _react2.default.createElement(
+    _reactMedia2.default,
+    { query: '(max-width: 768px)' },
+    function (matches) {
+      return matches ? _react2.default.createElement(
+        'div',
+        { style: { padding: '10px' } },
+        _react2.default.createElement(HeaderAndFilter, props),
+        _react2.default.createElement(
+          _collapsible2.default,
+          {
+            isActive: (0, _lodash4.default)(props.storyFilter),
+            title: 'component list'
+          },
+          props.stories && _react2.default.createElement(
+            'div',
+            { style: mobileScrollStyle },
+            _react2.default.createElement(_stories2.default, (0, _lodash2.default)(props, storyProps))
+          )
+        )
+      ) : _react2.default.createElement(
+        'div',
+        { style: { padding: '10px 0 10px 10px' } },
+        _react2.default.createElement(HeaderAndFilter, props),
+        _react2.default.createElement(
+          'div',
+          { style: scrollStyle },
+          props.stories ? _react2.default.createElement(_stories2.default, (0, _lodash2.default)(props, storyProps)) : null
+        )
+      );
+    }
   );
 };
 
