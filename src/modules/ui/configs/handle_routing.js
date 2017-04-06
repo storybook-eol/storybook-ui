@@ -57,7 +57,7 @@ export function updateStore(queryParams, actions) {
     left = 1,
     panelRight = 0,
     downPanel,
-    ...customQueryParams,
+    ...customQueryParams
   } = queryParams;
 
   if (selectedKind && selectedStory) {
