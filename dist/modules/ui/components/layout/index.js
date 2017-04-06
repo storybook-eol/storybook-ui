@@ -36,6 +36,10 @@ var _hsplit = require('./hsplit');
 
 var _hsplit2 = _interopRequireDefault(_hsplit);
 
+var _dimensions = require('./dimensions');
+
+var _dimensions2 = _interopRequireDefault(_dimensions);
+
 var _reactSplitPane = require('@kadira/react-split-pane');
 
 var _reactSplitPane2 = _interopRequireDefault(_reactSplitPane);
@@ -104,17 +108,72 @@ var onDragEnd = function onDragEnd() {
   document.body.classList.remove('dragging');
 };
 
+var saveHeightPanel = function saveHeightPanel(h) {
+  try {
+    localStorage.setItem('splitPos', h);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
+var getSavedHeight = function getSavedHeight(h) {
+  try {
+    return localStorage.getItem('splitPos');
+  } catch (e) {
+    return h;
+  }
+};
+
 var Layout = function (_React$Component) {
   (0, _inherits3.default)(Layout, _React$Component);
 
-  function Layout() {
+  function Layout(props) {
     (0, _classCallCheck3.default)(this, Layout);
-    return (0, _possibleConstructorReturn3.default)(this, (Layout.__proto__ || (0, _getPrototypeOf2.default)(Layout)).apply(this, arguments));
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, (Layout.__proto__ || (0, _getPrototypeOf2.default)(Layout)).call(this, props));
+
+    _this.state = {
+      previewPanelDimensions: {
+        height: 0,
+        width: 0
+      }
+    };
+
+    _this.onResize = _this.onResize.bind(_this);
+    return _this;
   }
 
   (0, _createClass3.default)(Layout, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      window.addEventListener('resize', this.onResize);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      window.removeEventListener('resize', this.onResize);
+    }
+  }, {
+    key: 'onResize',
+    value: function onResize() {
+      var _previewPanelRef = this.previewPanelRef,
+          clientWidth = _previewPanelRef.clientWidth,
+          clientHeight = _previewPanelRef.clientHeight;
+
+
+      this.setState({
+        previewPanelDimensions: {
+          width: clientWidth,
+          height: clientHeight
+        }
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var _props = this.props,
           goFullScreen = _props.goFullScreen,
           showLeftPanel = _props.showLeftPanel,
@@ -123,6 +182,7 @@ var Layout = function (_React$Component) {
           downPanel = _props.downPanel,
           leftPanel = _props.leftPanel,
           preview = _props.preview;
+      var previewPanelDimensions = this.state.previewPanelDimensions;
 
 
       var previewStyle = normalPreviewStyle;
@@ -137,12 +197,8 @@ var Layout = function (_React$Component) {
         downPanelDefaultSize = downPanelInRight ? 400 : 200;
       }
 
-      if (typeof localStorage !== 'undefined') {
-        var savedSize = localStorage.getItem('splitPos');
-        if (typeof savedSize !== 'undefined') {
-          downPanelDefaultSize = savedSize;
-        }
-      }
+      // Get the value from localStorage or user downPanelDefaultSize
+      downPanelDefaultSize = getSavedHeight(downPanelDefaultSize);
 
       return _react2.default.createElement(
         'div',
@@ -155,7 +211,8 @@ var Layout = function (_React$Component) {
             defaultSize: leftPanelDefaultSize,
             resizerChildren: vsplit,
             onDragStarted: onDragStart,
-            onDragFinished: onDragEnd
+            onDragFinished: onDragEnd,
+            onChange: this.onResize
           },
           _react2.default.createElement(
             'div',
@@ -173,9 +230,8 @@ var Layout = function (_React$Component) {
               onDragStarted: onDragStart,
               onDragFinished: onDragEnd,
               onChange: function onChange(size) {
-                if (typeof localStorage !== 'undefined') {
-                  localStorage.setItem('splitPos', size);
-                }
+                saveHeightPanel(size);
+                _this2.onResize();
               }
             },
             _react2.default.createElement(
@@ -183,9 +239,15 @@ var Layout = function (_React$Component) {
               { style: contentPanelStyle },
               _react2.default.createElement(
                 'div',
-                { style: previewStyle },
+                {
+                  style: previewStyle,
+                  ref: function ref(_ref) {
+                    _this2.previewPanelRef = _ref;
+                  }
+                },
                 preview()
-              )
+              ),
+              _react2.default.createElement(_dimensions2.default, previewPanelDimensions)
             ),
             _react2.default.createElement(
               'div',

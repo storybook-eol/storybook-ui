@@ -59,19 +59,21 @@ describe('manager.ui.config.handle_routing', () => {
   });
 
   describe('handleInitialUrl', () => {
+    const mockActions = () => ({
+      api: {
+        selectStory: sinon.mock(),
+        setQueryParams: sinon.mock(),
+      },
+      shortcuts: {
+        setOptions: sinon.mock(),
+      },
+      ui: {
+        selectDownPanel: sinon.mock(),
+      },
+    });
+
     it('should call the correct action according to URL', () => {
-      const actions = {
-        api: {
-          selectStory: sinon.mock(),
-          setQueryParams: sinon.mock(),
-        },
-        shortcuts: {
-          setOptions: sinon.mock(),
-        },
-        ui: {
-          selectDownPanel: sinon.mock(),
-        },
-      };
+      const actions = mockActions();
 
       // eslint-disable-next-line max-len
       const url = '?selectedKind=kk&selectedStory=ss&full=1&down=0&left=0&panelRight=0&downPanel=test&customText=teststring';
@@ -95,6 +97,20 @@ describe('manager.ui.config.handle_routing', () => {
       expect(actions.ui.selectDownPanel.calledWith('test')).to.be.true;
       expect(actions.api.setQueryParams.calledWith({ customText: 'teststring' })).to.be.true;
       /* eslint-enable no-unused-expressions */
+    });
+
+    it('should handle URLs with only kind selected', () => {
+      const actions = mockActions();
+
+      const url = '?selectedKind=kk';
+
+      const location = {
+        search: url,
+      };
+      window.location.search = url;
+      handleInitialUrl(actions, location);
+
+      expect(actions.api.selectStory.callCount).to.be.equal(1);
     });
   });
 });
