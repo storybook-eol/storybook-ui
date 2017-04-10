@@ -13,11 +13,10 @@ const args = [
 ].join(' ');
 
 const cmd = `${babel} ${args}`;
-shell.echo(chalk.gray(cmd));
 shell.rm('-rf', 'dist');
 
+shell.echo(chalk.gray('\n=> Transpiling \'src\' into ES5 ...\n'));
+shell.echo(chalk.gray(cmd));
 shell.echo('');
-shell.echo(chalk.gray('=> Transpiling \'src\' into ES5 ...'));
 shell.exec(cmd);
-shell.echo(chalk.gray('=> Transpiling completed.'));
-shell.echo('');
+shell.echo(chalk.gray('\n=> Transpiling completed.'));
