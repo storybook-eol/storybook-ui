@@ -2,6 +2,12 @@
 
 This is the core UI of [react-storybook](https://github.com/storybooks/react-storybook) and other similar projects. It's a React based UI where you can initialize with a simple function. You can configure it by providing a simple provider API.
 
+--- 
+
+**This repo has been deprecated because it's not included in https://github.com/storybooks/storybook**
+
+---
+
 ![Storybook UI Demo](./docs/storybook-ui-demo.png)
 
 ## Usage
