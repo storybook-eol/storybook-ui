@@ -4,7 +4,7 @@ This is the core UI of [react-storybook](https://github.com/storybooks/react-sto
 
 --- 
 
-**This repo has been deprecated because it's not included in https://github.com/storybooks/storybook**
+**This repo has been deprecated because it's now included in https://github.com/storybooks/storybook**
 
 ---
 
