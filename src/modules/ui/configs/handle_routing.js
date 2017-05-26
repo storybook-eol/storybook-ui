@@ -57,10 +57,10 @@ export function updateStore(queryParams, actions) {
     left = 1,
     panelRight = 0,
     downPanel,
-    ...customQueryParams,
+    ...customQueryParams
   } = queryParams;
 
-  if (selectedKind && selectedStory) {
+  if (selectedKind) {
     actions.api.selectStory(selectedKind, selectedStory);
   }
 

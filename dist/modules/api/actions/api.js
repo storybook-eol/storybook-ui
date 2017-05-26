@@ -77,6 +77,7 @@ function ensureStory(storyKinds, selectedKind, selectedStory) {
   });
   if (found) return found;
 
+  // if the selected story is non-existant, select the first story
   return kindInfo.stories[0];
 }
 

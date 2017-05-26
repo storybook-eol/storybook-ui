@@ -103,7 +103,7 @@ function updateStore(queryParams, actions) {
       customQueryParams = (0, _objectWithoutProperties3.default)(queryParams, ['selectedKind', 'selectedStory', 'full', 'down', 'left', 'panelRight', 'downPanel']);
 
 
-  if (selectedKind && selectedStory) {
+  if (selectedKind) {
     actions.api.selectStory(selectedKind, selectedStory);
   }
 
